@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
 import Bottom from '../include/Bottom'
 import Header from '../include/Header'
-
+/*eslint-disable*/
 const DeptPage = () => {
   const [depts, setDepts] = useState([
     {deptno:10, dname:"개발1팀", loc:"부산"}
@@ -30,7 +30,7 @@ const DeptPage = () => {
       </thead>
       <tbody>
       {Object.keys(depts).map(key=>(
-        <tr ket = {key}>
+        <tr key = {key}>
           <td>{depts[key].deptno}</td>
           <td>{depts[key].dname}</td>
           <td>{depts[key].loc}</td>
