@@ -6,7 +6,6 @@ const DeptRow = (props) => {
   return (
     <>
       <tr>
-        <td>{}</td>
         <td>{dept.deptno}</td>
         <td>{dept.dname}</td>
         <td>{dept.loc}</td>

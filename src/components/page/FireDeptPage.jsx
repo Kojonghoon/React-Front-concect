@@ -54,7 +54,6 @@ const FireDeptPage = () => {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>#</th>
           <th>부서번호</th>
           <th>부서명</th>
           <th>지역</th>
