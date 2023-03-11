@@ -1,3 +1,65 @@
+*{
+  box-sizing: border-box;
+}
+
+button{
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.habit{
+  font-size: 2.5rem;/* root태그 기준값 */
+  padding: 0.5em;/* 내부여백 */
+  list-style: none;/* li 구슬삭제 */
+}
+
+
+.habit-count{
+  display: inline-block;
+  text-align: center;
+  line-height: 2.5rem;
+  border-radius: 50%;
+  margin-left: 0.2rem;
+  margin-right: 0.5rem;
+  background-color: darkseagreen;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: white;
+}
+
+.habit-button{
+  font-size: 2.5rem;
+  margin: 0 0.1em;
+  background-color: transparent;
+}
+
+.habit-increase,
+.habit-decrease
+{
+  color: goldenrod;
+}
+
+.habit-delete{
+  font-size: 2rem;
+  color: darkred;
+}
+
+.add-input{
+  font-size: 2rem;
+  margin-right: 0.2em;
+}
+
+.add-button{
+  height: 100%;
+  font-size: 1.5rem;
+  background-color: gray;
+  color: white;
+  padding: 0.3em 0.5em;
+}
+
+
+/* 
 .App {
   text-align: center;
 }
@@ -36,3 +98,4 @@
     transform: rotate(360deg);
   }
 }
+ */

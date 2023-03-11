@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap';
-import Bottom from '../include/Bottom'
-import Header from '../include/Header'
-import DeptRow from '../dept/DeptRow'
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import Bottom from "../include/Bottom";
+import Header from "../include/Header";
+import DeptRow from "../dept/DeptRow";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import {
   getDatabase,
@@ -10,6 +10,7 @@ import {
   set,
   onValue,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+import { useNavigate } from "react-router-dom";
 /*eslint-disable*/
 
 const firebaseConfig = {
@@ -20,57 +21,71 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_FS_PROJECTID,
   storageBucket: process.env.REACT_APP_FS_STORAGEBUCKET,
   messagingSenderId: process.env.REACT_APP_FS_MESSAGINGSENDERID,
-  appId: process.env.REACT_APP_FS_APPID
+  appId: process.env.REACT_APP_FS_APPID,
 };
 
 const app = initializeApp(firebaseConfig);
 console.log(app);
-const database=getDatabase()
+const database = getDatabase();
 
-const FireDeptPage = () => {
+const FireDeptPage = ({ authLogic }) => {
+  const navigate = useNavigate();
+  const onLogout = () => {
+    console.log("HomePage onLogout 호출");
+    authLogic.logout();
+  };
+
+  useEffect(() => {
+    authLogic.onAuthChange((user) => {
+      if (!user) {
+        navigate("/");
+      }
+    });
+  });
+  
   const [depts, setDepts] = useState([]);
   useEffect(() => {
-        console.log('useEffect호출')
-        console.log(database)
-        console.log(depts)
+    console.log("useEffect호출");
+    console.log(database);
+    console.log(depts);
 
-        const starCountRef = ref(database, 'dept');
-        onValue(starCountRef, (snapshot) => {
-        const data = snapshot.val();
+    const starCountRef = ref(database, "dept");
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
 
-        console.log(data)
-        setDepts(data)
-        console.log(depts)
-});
-      }, []);//옵션에 별도의 값을 지정하지 않으면 최초 한번만 실행됨
-      //useEffect에서 초기화 된 상태값 출력해 보기
-      console.log(depts)
+      console.log(data);
+      setDepts(data);
+      console.log(depts);
+    });
+  }, []); //옵션에 별도의 값을 지정하지 않으면 최초 한번만 실행됨
+  //useEffect에서 초기화 된 상태값 출력해 보기
+  console.log(depts);
+
   return (
     <>
-    <div>
-      <Header/>
-    <div>부서관리 페이지</div>
-    <div className='dept-list'>
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>부서번호</th>
-          <th>부서명</th>
-          <th>지역</th>
-        </tr>
-      </thead>
-      <tbody>
-         {Object.keys(depts).map(key=>(
-          <DeptRow key={key}dept={depts[key]} />
-          ))
-          }
-</tbody>
-    </Table>
-    </div>
-      <Bottom/>
-    </div>
-  </>
-  )
-}
+      <div>
+        <Header onLogout={onLogout} />
+        <div>부서관리 페이지</div>
+        <div className="dept-list">
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>부서번호</th>
+                <th>부서명</th>
+                <th>지역</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(depts).map((key) => (
+                <DeptRow key={key} dept={depts[key]} />
+              ))}
+            </tbody>
+          </Table>
+        </div>
+        <Bottom />
+      </div>
+    </>
+  );
+};
 
-export default FireDeptPage
+export default FireDeptPage;
