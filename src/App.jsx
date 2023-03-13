@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import BoardDetail from './components/board/BoardDetail';
+import BoardWriteForm from './components/board/BoardWriteForm';
 import LoginPage from './components/login/LoginPage';
 import BoardPage from './components/page/BoardPage';
 import DeptPage from './components/page/DeptPage';
@@ -23,7 +25,7 @@ const App=({authLogic})=> {
     {id:3, name:'스쿼트', count:0},
   ]);
 
-  //@param1 - 콜백함수임 - 객체
+//@param1 - 콜백함수임 - 객체
 //@param2 - 의존성 배열 - Dependency Array
 //:의존성 배열이 비어있으면 최초 App 컴포넌트가 렌더링(what?, where?) 될 때 딱 한번만 실행 된다
 //재렌더링이 되는 대상은 return안에 있는 코드들이다.
@@ -71,6 +73,8 @@ const App=({authLogic})=> {
       <Route path='/' exact={true} element={<LoginPage authLogic={authLogic}/>}/>
       <Route path='/home/:userId' exact={true} element={<HomePage authLogic={authLogic} />}/>
       <Route path='/board' exact={true} element={<BoardPage authLogic={authLogic}/>}/>
+      <Route path='/board/write/*' element={<BoardWriteForm/>}/>
+      <Route path='/boarddetail/:bm_no' exact={true} element={<BoardDetail/>}/>
       <Route path='/workout' exact={true} element={<WorkoutPage authLogic={authLogic}
       workouts={items} onIncrement={handleIncrement}
         onDecrement={handleDecrement}
