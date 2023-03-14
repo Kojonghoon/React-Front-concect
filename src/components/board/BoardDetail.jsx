@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { boardListDB } from "../../service/dbLogic";
 import { ContainerDiv, FormDiv, HeaderDiv } from "../styles/FormStyle";
+import BoardFileDetail from "./BoardFileDetail";
 import BoardHeader from "./BoardHeader";
 
 const BoardDetail = () => {
@@ -54,9 +55,10 @@ const BoardDetail = () => {
         <FormDiv>
           <BoardHeader board={board} bm_no={bm_no} />
           <section style={{ minHeight: "400px" }}>
+        {/* 오라클 서버에서 읽어온 BM_CONTENT 정보를 Quill Editor에 출력하는 코드임 */}
             <div dangerouslySetInnerHTML={{ __html: board.BM_CONTENT }}></div>
           </section>
-          {/* <BoardFileDetail files={files} /> */}
+          <BoardFileDetail files={files} />
           <hr style={{ height: "2px" }} />
         </FormDiv>
       </ContainerDiv>
