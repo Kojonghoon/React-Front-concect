@@ -11,6 +11,7 @@ import {
   onValue,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 import { useNavigate } from "react-router-dom";
+import HackerNewsList from "../hacker/HackerNewsList";
 /*eslint-disable*/
 
 const firebaseConfig = {
@@ -42,7 +43,7 @@ const FireDeptPage = ({ authLogic }) => {
       }
     });
   });
-  
+
   const [depts, setDepts] = useState([]);
   useEffect(() => {
     console.log("useEffect호출");
@@ -65,23 +66,14 @@ const FireDeptPage = ({ authLogic }) => {
     <>
       <div>
         <Header onLogout={onLogout} />
-        <div>부서관리 페이지</div>
-        <div className="dept-list">
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>부서번호</th>
-                <th>부서명</th>
-                <th>지역</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.keys(depts).map((key) => (
-                <DeptRow key={key} dept={depts[key]} />
-              ))}
-            </tbody>
-          </Table>
-        </div>
+        <NewsListUL>
+          <HackerNewsList
+            newsList={currentNews(newsList)}
+            newsPerPage={newsPerPage} //
+            totalNews={newsList.length}
+            paginate={setCurrentPage}
+          />
+        </NewsListUL>
         <Bottom />
       </div>
     </>
