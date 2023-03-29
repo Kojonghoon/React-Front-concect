@@ -55,17 +55,17 @@ const BoardPage = ({ authLogic }) => {
   const reactSearch=()=>{
 
   }
-  //전체 조회 구현 
+  //전체 조회 구현
   const boardList=()=>{
 
   }
 
   return (
     <>
-      <Header onLogout={onLogout} />
+      {/* <Header onLogout={onLogout} /> */}
       <div className="container">
             <div className="page-header">
-              <h2>공지관리 <small>글목록</small></h2>
+              <h2>게시판 <small>글목록</small></h2>
               <hr />
             </div>
 
@@ -83,7 +83,7 @@ const BoardPage = ({ authLogic }) => {
                       aria-label="검색어를 입력하세요" aria-describedby="btn_search" />
               </div>
               <div className="col-3">
-                <Button variant='danger' id="btn_search" onClick={reactSearch}>검색</Button>
+                <Button variant='danger' id="btn_search"  style={{ backgroundColor: "black" }} onClick={reactSearch}>검색</Button>
               </div>
             </div>
 
@@ -104,10 +104,10 @@ const BoardPage = ({ authLogic }) => {
               </Table>
               <hr />
               <div className='boardlist-footer'>
-                <Button variant="warning" onClick={boardList}>
+                <Button variant="warning"  style={{ backgroundColor: "black", color:"white" }} onClick={boardList}>
                   전체조회
                 </Button>&nbsp;
-                <Button variant="success" onClick={()=>{navigate(`/board/write`)}}>
+                <Button variant="success"  style={{ backgroundColor: "black" }} onClick={()=>{navigate(`/board/write`)}}>
                   글쓰기
                 </Button>
               </div>
